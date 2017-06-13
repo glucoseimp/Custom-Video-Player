@@ -35,12 +35,7 @@ function handleProgress() {
 }
 
 function videoBuffering() {
-  const degrees = 10;
   waitingIcon.style.display = 'block';
-  while (!video.played) {
-    waitingIcon.style.transform = `rotate(${degrees}deg)`;
-    degrees += 10;
-  }
 }
 
 video.addEventListener('click', togglePlay);
