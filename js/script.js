@@ -5,6 +5,7 @@ const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
 const ranges = player.querySelectorAll('.player__slider');
 const skipButtons = player.querySelectorAll('[data-skip]');
+const waitingIcon = player.querySelector('.waiting');
 
 function togglePlay() {
   const method = video.paused ? 'play' : 'pause';
@@ -33,11 +34,22 @@ function handleProgress() {
   progressBar.style.flexBasis = `${percent}%`;
 }
 
+function videoBuffering() {
+  const degrees = 10;
+  waitingIcon.style.display = 'block';
+  while (!video.played) {
+    waitingIcon.style.transform = `rotate(${degrees}deg)`;
+    degrees += 10;
+  }
+}
+
 video.addEventListener('click', togglePlay);
 video.addEventListener('click', updateButton);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 video.addEventListener('timeupdate', handleProgress);
+video.addEventListener('waiting', videoBuffering);
+video.addEventListener('playing', () => waitingIcon.style.display = 'none');
 
 skipButtons.forEach(button => button.addEventListener('click', skip));
 

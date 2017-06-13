@@ -124,3 +124,12 @@ input[type=range]::-moz-range-thumb {
   background: #ffc600;
   cursor: pointer;
 }
+
+.waiting {
+  display: none;
+  position: absolute;
+  top: 45%;
+  right: 45%;
+  transform: rotate(0deg);
+  transition: all .3s;
+}
